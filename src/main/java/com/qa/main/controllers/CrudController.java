@@ -2,9 +2,9 @@ package com.qa.main.controllers;
 
 import java.util.List;
 
-public interface CrudController<t> {
+public interface CrudController<T> {
 
-	List<t> readAll();
+	List<T> readAll();
 	T read();
 	T readLatest();
 	T create();
