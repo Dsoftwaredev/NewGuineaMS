@@ -1,4 +1,4 @@
-package com.qa.main.controllers;
+package com.qa.newguinea.main.controllers;
 
 import java.util.List;
 
