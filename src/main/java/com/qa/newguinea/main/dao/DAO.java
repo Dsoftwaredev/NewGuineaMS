@@ -7,7 +7,7 @@ public interface DAO <T>{
 	
 	public T read(int id);
 	
-	public List<T> readAll();
+	//public List<T> readAll();
 	
 	public T create(T t);
 	
