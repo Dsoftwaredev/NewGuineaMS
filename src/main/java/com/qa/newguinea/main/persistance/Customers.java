@@ -15,6 +15,15 @@ public class Customers {
 		this.userID = userID;
 		this.custAdress = custAdress;
 	}
+	
+
+	public Customers(String custName, int userID, String custAdress) {
+		super();
+		this.custName = custName;
+		this.userID = userID;
+		this.custAdress = custAdress;
+	}
+
 
 	public int getCustomerID() {
 		return customerID;
