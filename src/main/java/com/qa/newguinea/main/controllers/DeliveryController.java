@@ -39,7 +39,19 @@ public class DeliveryController implements CrudController<Delivery> {
 	@Override
 	public Delivery update() {
 		System.out.println("Please input delivery ID:");
-		//get order status
+		int deliveryid = scan.nextInt();
+		System.out.println("Select option:\nAssign Driver\nUpdate Status");
+		String option = scan.nextLine();
+		switch(option.toLowerCase()) {
+			case "assign driver" :
+				//assign driver id to delivery
+				break;
+			case "update status":
+				System.out.println("Awaiting driver\nDispatched\nDelivered\nRescheduled\nCancelled");
+				break;
+			default:
+				break;
+		}
 		return null;
 	}
 
