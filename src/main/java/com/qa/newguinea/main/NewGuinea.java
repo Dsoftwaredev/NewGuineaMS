@@ -57,7 +57,7 @@ public class NewGuinea {
 		int options = scan.nextInt();
 		switch(options) {
 		case 1:
-			Driver driver = driverDAO.
+			Driver driver = orderDAO.
 			break;
 		case 2:
 			Driver driver = driverDAO.
