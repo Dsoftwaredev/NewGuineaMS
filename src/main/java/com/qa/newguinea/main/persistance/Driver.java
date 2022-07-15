@@ -15,6 +15,13 @@ public class Driver {
 		this.userID = userID;
 		this.driverZone = driverZone;
 	}
+	
+	public Driver(String driverName, int userID, String driverZone) {
+		super();
+		this.driverName = driverName;
+		this.userID = userID;
+		this.driverZone = driverZone;
+	}
 
 	public int getDriverID() {
 		return driverID;

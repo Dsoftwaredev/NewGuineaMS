@@ -30,6 +30,17 @@ public class Delivery {
 		this.driverID = driverID;
 		this.deliveryStatus = deliveryStatus;
 	}
+	
+	public Delivery(int orderID, Date deliveryDate, String deliveryAddress, String deliveryZone,
+			int driverID, String deliveryStatus) {
+		super();
+		this.orderID = orderID;
+		this.deliveryDate = deliveryDate;
+		this.deliveryAddress = deliveryAddress;
+		this.deliveryZone = deliveryZone;
+		this.driverID = driverID;
+		this.deliveryStatus = deliveryStatus;
+	}
 
 	public int getDeliveryID() {
 		return deliveryID;
