@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS orders(
 CREATE TABLE IF NOT EXISTS deliveries(
 	delivery_id INT AUTO_INCREMENT NOT NULL,
     order_id INT NOT NULL,
-    driver_id INT NOT NULL,
+    driver_id INT,
     delivery_date DATE NOT NULL,
     delivery_address VARCHAR(100) NOT NULL,
     delivery_zone CHAR(10) NOT NULL,
