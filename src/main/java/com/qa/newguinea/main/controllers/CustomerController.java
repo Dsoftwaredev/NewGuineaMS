@@ -16,17 +16,21 @@ public class CustomerController implements CrudController<Customers>{
 		for (Customers customer : customers);
 			System.out.println(customers);
 		return customers;
+<<<<<<< HEAD
 	}*/
 
+=======
+	}
+ 
+>>>>>>> 92ea8ec2fcb92d277c1419a8e64ba817d9d8d1c3
 	@Override
 	public Customers read() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Customers readLatest() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -38,20 +42,29 @@ public class CustomerController implements CrudController<Customers>{
 		int userID = scan.nextInt();
 		System.out.println("Please enter a customer address");
 		String address = scan.nextLine();
-		Customers customers = customerDAO.create(new Customers(name, userID, address))
+		Customers customers = customerDAO.create(new Customers(name, userID, address));
 		return customers;
 	}
 
 	@Override
 	public Customers update() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("What is the ID of the customer you would like to update");
+		int id = scan.nextInt();
+		System.out.println("Please enter a customer name");
+		String name = scan.nextLine();
+		System.out.println("Please enter a user id")
+		int userID = scan.nextInt();
+		System.out.println("Please enter a customer address");
+		String address = scan.nextLine();
+		Customers customers = customerDAO.create(new Customers(name, userID, address));
+		return customers;
 	}
 
 	@Override
 	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("please enter the id of the customer you want to delete");
+		int id = scan.nextInt();
+		return customerDAO.delete(id);
 	}
 
 }

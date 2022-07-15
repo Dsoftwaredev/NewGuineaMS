@@ -41,6 +41,7 @@ public class DeliveryController implements CrudController<Delivery> {
 	public Delivery create() {
 		System.out.println("Please input order ID:");
 		int orderId = scan.nextInt();
+		
 		//get order info
 		//create delivery using dao
 		return null;
