@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.qa.newguinea.main.dao.OrderDAO;
-
+import com.qa.newguinea.main.persistance.Delivery;
 import com.qa.newguinea.main.persistance.Order;
 
 public class OrderController implements CrudController<Order> {
@@ -41,6 +41,15 @@ public class OrderController implements CrudController<Order> {
 	public Order create() {
 		System.out.println("Please input order ID:");
 		int orderId = scan.nextInt();
+		System.out.println("Please input order date:");
+        String dateInString = scan.nextLine();
+        Date date = Date.valueOf(dateInString);
+		System.out.println("Please input address:");
+		String orderaddress = scan.nextLine();
+		System.out.println("PLease input delivery zone:");
+		String deliveryzone = scan.nextLine();
+		String status = "Awaiting driver";
+		Order o = dao.create(new Order(orderId, date, orderaddress));
 		return null;
 	}
 
