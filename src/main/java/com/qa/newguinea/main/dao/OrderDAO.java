@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qa.newguinea.main.persistance.Delivery;
 import com.qa.newguinea.main.persistance.Order;
 import com.qa.newguinea.utils.DBUtils;
 
@@ -39,6 +40,24 @@ public class OrderDAO implements DAO<Order> {
 		}
 		return null;
 	}
+	
+	public List<Order> readAll() {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1;");) {
+			try (ResultSet resultSet = statement.executeQuery();) {
+				List<Order> list = new ArrayList<Order>();
+				
+				while(resultSet.next()) {
+					list.add(modelFromResult(resultSet));
+				}
+				return list;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
 
 	@Override
 	public Order create(Order o) {
