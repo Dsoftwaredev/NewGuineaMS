@@ -79,7 +79,7 @@ public class OrderDAO implements DAO<Order> {
 	public Order update(Order o) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO orders(customer_id, order_date, order_address) VALUES (?, ?, ?) WHERE order_id = ?;");) {
+						.prepareStatement("UPDATE orders SET customer_id = ?, order_date = ?, order_address = ? WHERE order_id = ?;");) {
 			statement.setInt(1, o.getCustomerid());
 			statement.setDate(2, o.getOrderdate());
 			statement.setString(3, o.getCustomeraddress());
