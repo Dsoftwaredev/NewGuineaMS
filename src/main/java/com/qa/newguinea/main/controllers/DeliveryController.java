@@ -1,29 +1,39 @@
 package com.qa.newguinea.main.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.qa.newguinea.main.dao.DeliveryDAO;
 import com.qa.newguinea.main.persistance.Delivery;
 
 public class DeliveryController implements CrudController<Delivery> {
 
 	Scanner scan = new Scanner(System.in);
 	
+	DeliveryDAO dao = new DeliveryDAO();
+	
 	@Override
 	public List<Delivery> readAll() {
-		// TODO Auto-generated method stub
+		List<Delivery> list = new ArrayList<Delivery>();
+		list = dao.readAll();
+		System.out.println(list);
 		return null;
 	}
 
 	@Override
 	public Delivery read() {
-		// TODO Auto-generated method stub
+		System.out.println("Please input delivery ID:");
+		int deliveryid = scan.nextInt();
+		Delivery d = dao.read(deliveryid);
+		System.out.println(d);
 		return null;
 	}
 
 	@Override
 	public Delivery readLatest() {
-		// TODO Auto-generated method stub
+		Delivery d = dao.readLatest();
+		System.out.println(d);
 		return null;
 	}
 

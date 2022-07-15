@@ -10,14 +10,14 @@ public class CustomerController implements CrudController<Customers>{
 	
 	Scanner scan = new Scanner(System.in);
 
-	@Override
+	/*@Override
 	public List<Customers> readAll() {
 		List<Customers> customers = customerDAO.readAll();
 		for (Customers customer : customers);
 			System.out.println(customers);
 		return customers;
-	}
-git 
+	}*/
+
 	@Override
 	public Customers read() {
 		// TODO Auto-generated method stub
