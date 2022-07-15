@@ -32,7 +32,16 @@ public class CustomerDAO implements DAO<Customers> {
 
 	@Override
 	public Customers modelFromResult(ResultSet result) {
-		// TODO Auto-generated method stub
+		try {
+			int customerId = result.getInt("customer_id");
+			String name = result.getString("customer_name");
+			int userId = result.getInt("user_id");
+			String address = result.getString("customer_address");
+			return new Customers(customerId, name, userId, address);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
