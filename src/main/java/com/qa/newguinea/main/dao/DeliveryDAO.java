@@ -63,6 +63,25 @@ public class DeliveryDAO implements DAO<Delivery> {
 		return null;
 	}
 	
+	public List<Delivery> readAllByZone(String zone) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM deliveries WHERE delivery_zone = ?;");) {
+			statement.setString(1, zone);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				List<Delivery> list = new ArrayList<Delivery>();
+				
+				while(resultSet.next()) {
+					list.add(modelFromResult(resultSet));
+				}
+				return list;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
 	
 	public Delivery readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
