@@ -1,10 +1,11 @@
 package com.qa.newguinea.main.controllers;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import com.qa.newguinea.main.dao.OrderDAO;
-import com.qa.newguinea.main.persistance.Delivery;
+
 import com.qa.newguinea.main.persistance.Order;
 
 public class OrderController implements CrudController<Order> {
@@ -46,6 +47,12 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public Order update() {
 		System.out.println("Please input order ID:");
+		int orderid = scan.nextInt();
+		System.out.println("please input order date:");
+		String dateInString = scan.nextLine();
+        Date date = Date.valueOf(dateInString);
+        System.out.println("Please input address:");
+		String orderaddress = scan.nextLine();
 		return null;
 	}
 
