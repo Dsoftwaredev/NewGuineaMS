@@ -79,7 +79,7 @@ public class DeliveryController implements CrudController<Delivery> {
 		System.out.println("Please input delivery ID:");
 		int id = scan.nextInt();
 		//dao delivery
-		System.out.println("Delviery cancelled.");
+		System.out.println("Delivery cancelled.");
 		return 0;
 	}
 

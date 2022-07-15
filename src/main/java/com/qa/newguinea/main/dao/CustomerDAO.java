@@ -70,14 +70,33 @@ public class CustomerDAO implements DAO<Customers> {
 	}
 
 	@Override
-	public Customers update(Customers t) {
-		// TODO Auto-generated method stub
+	public Customers update(Customers c) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE customers SET customer_name = ?, user_id = ?,  customer_address = ?, WHERE customer_id = ?");) {
+			statement.setString(1, c.getCustName());
+			statement.setInt(2,c.getUserID());
+			statement.setString(3, c.getCustAdress());
+			statement.executeUpdate();
+			return readLatest();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		
 		return null;
 	}
-
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("DELETE FROM customers WHERE customer_id = ?");) {
+			statement.setInt(1, id);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		return 0;
 	}
 
