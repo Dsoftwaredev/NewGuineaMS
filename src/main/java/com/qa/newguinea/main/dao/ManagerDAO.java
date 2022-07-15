@@ -92,7 +92,7 @@ public class ManagerDAO implements DAO<Manager> {
 	public Manager update(Manager m) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO managers(manager_name, user_id) VALUES (?, ?) WHERE driver_id = ?");) {
+						.prepareStatement("UPDATE managers SET manager_name = ?, user_id = ? WHERE driver_id = ?");) {
 			statement.setString(1, m.getManagername());
 			statement.setInt(2, m.getUserId());
 			statement.setInt(3, m.getManagerid());

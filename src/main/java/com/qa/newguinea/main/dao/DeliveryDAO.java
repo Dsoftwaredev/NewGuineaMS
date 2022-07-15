@@ -120,7 +120,7 @@ public class DeliveryDAO implements DAO<Delivery> {
 	public Delivery update(Delivery d) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO deliveries(order_id, delivery_date, deliver_address, delivery_zone, delivery_status, driver_id) VALUES (?, ?, ?, ?, ?, ?) WHERE delivery_id = ?;");) {
+						.prepareStatement("UPDATE deliveries SET order_id = ?, delivery_date = ?, deliver_address = ?, delivery_zone = ?, delivery_status = ?, driver_id = ? WHERE delivery_id = ?;");) {
 			statement.setInt(1, d.getOrderID());
 			statement.setDate(2, d.getDeliveryDate());
 			statement.setString(3, d.getDeliveryAddress());

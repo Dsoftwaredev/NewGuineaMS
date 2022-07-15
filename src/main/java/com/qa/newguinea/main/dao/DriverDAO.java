@@ -94,7 +94,7 @@ public class DriverDAO implements DAO<Driver> {
 	public Driver update(Driver d) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO drivers(driver_name, driver_zone, user_id) VALUES (?, ?, ?) WHERE driver_id = ?");) {
+						.prepareStatement("UPDATE drivers SET driver_name = ?, driver_zone = ?,  user_id = ?, WHERE driver_id = ?");) {
 			statement.setString(1, d.getDriverName());
 			statement.setString(2, d.getDriverZone());
 			statement.setInt(3, d.getUserID());
