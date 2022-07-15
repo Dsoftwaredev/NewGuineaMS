@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qa.newguinea.main.persistance.Delivery;
 import com.qa.newguinea.main.persistance.Order;
 import com.qa.newguinea.utils.DBUtils;
 
@@ -39,6 +40,24 @@ public class OrderDAO implements DAO<Order> {
 		}
 		return null;
 	}
+	
+	public List<Order> readAll() {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1;");) {
+			try (ResultSet resultSet = statement.executeQuery();) {
+				List<Order> list = new ArrayList<Order>();
+				
+				while(resultSet.next()) {
+					list.add(modelFromResult(resultSet));
+				}
+				return list;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
 
 	@Override
 	public Order create(Order o) {
@@ -60,7 +79,7 @@ public class OrderDAO implements DAO<Order> {
 	public Order update(Order o) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO orders(customer_id, order_date, order_address) VALUES (?, ?, ?) WHERE order_id = ?;");) {
+						.prepareStatement("UPDATE orders SET customer_id = ?, order_date = ?, order_address = ? WHERE order_id = ?;");) {
 			statement.setInt(1, o.getCustomerid());
 			statement.setDate(2, o.getOrderdate());
 			statement.setString(3, o.getCustomeraddress());
