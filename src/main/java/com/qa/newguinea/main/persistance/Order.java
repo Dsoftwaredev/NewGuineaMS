@@ -4,15 +4,35 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Order {
+	
+	private int orderId;
 	private int customerid;
 	private Date orderdate;
 	private String customeraddress;
+	
+	public Order(int orderId, int customerid, Date orderdate, String customeraddress) {
+		super();
+		this.setOrderId(orderId);
+		this.customerid = customerid;
+		this.orderdate = orderdate;
+		this.customeraddress = customeraddress;
+	}
+	
 	public Order(int customerid, Date orderdate, String customeraddress) {
 		super();
 		this.customerid = customerid;
 		this.orderdate = orderdate;
 		this.customeraddress = customeraddress;
 	}
+	
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
 	public int getCustomerid() {
 		return customerid;
 	}
