@@ -12,14 +12,19 @@ public class CustomerController implements CrudController<Customers>{
 	
 	Scanner scan = new Scanner(System.in);
 
-	@Override
+	/*@Override
 	public List<Customers> readAll() {
 		List<Customers> customers = CustomerDAO.readAll();
 		for (Customers customer : customers);
 			System.out.println(customers);
 		return customers;
+<<<<<<< HEAD
+	}*/
+
+=======
 	}
  
+>>>>>>> 92ea8ec2fcb92d277c1419a8e64ba817d9d8d1c3
 	@Override
 	public Customers read() {
 
