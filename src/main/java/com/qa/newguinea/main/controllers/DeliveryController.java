@@ -16,9 +16,32 @@ public class DeliveryController implements CrudController<Delivery> {
 	
 	@Override
 	public List<Delivery> readAll() {
-		List<Delivery> list = new ArrayList<Delivery>();
-		list = dao.readAll();
-		System.out.println(list);
+		try {
+			List<Delivery> list = new ArrayList<Delivery>();
+			list = dao.readAll();
+			for(Delivery d : list) {
+				System.out.println(d);
+			}
+			return list;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public List<Delivery> readAllByZone(String zone){
+		try {
+			List<Delivery> list = new ArrayList<Delivery>();
+			list = dao.readAllByZone(zone);
+			for(Delivery d : list) {
+				System.out.println(d);
+			}
+			return list;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
@@ -52,6 +75,18 @@ public class DeliveryController implements CrudController<Delivery> {
 		String status = "Awaiting driver";
 		Delivery d = dao.create(new Delivery(orderId, date, deliveryaddress, deliveryzone, 0, status));
 		//create delivery using dao
+		return null;
+	}
+	
+	public Delivery assignDriver(int driverId, int deliveryId) {
+		try {
+			Delivery d = dao.read(deliveryId);
+			d.setDriverID(driverId);
+			return dao.update(d);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 

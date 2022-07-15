@@ -46,7 +46,7 @@ public class DriverDAO implements DAO<Driver> {
 	}
 	*/
 	
-	public Driver readUserId(int id) {
+	public Driver readByUserId(int id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM drivers WHERE user_id = ?");) {
 			statement.setInt(1, id);

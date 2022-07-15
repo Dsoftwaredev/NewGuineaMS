@@ -13,19 +13,20 @@ import com.qa.newguinea.utils.DBUtils;
 
 public class NewGuinea {
 	Scanner scan = new Scanner(System.in);
-	private final DriverController drivers = new DriverController();
-	private final DeliveryController deliveries = new DeliveryController();
+	private final DriverController driverController = new DriverController();
+	private final DeliveryController deliveryController = new DeliveryController();
 	final DriverDAO driverDAO = new DriverDAO();
-	final DeliveryDAO delivery = new DeliveryDAO();
+	final DeliveryDAO deliveryDAO = new DeliveryDAO();
 	final UserDAO userDAO = new UserDAO();
 	final ManagerDAO managerDAO = new ManagerDAO();
 	
 	
 	
 	public void loginSystem() {
+		DBUtils.connect();
 		System.out.println("Would you like to login as a manager or driver?");
 		String userType = scan.nextLine();
-		DBUtils.connect();
+	
 		
 	
 		System.out.println("What is your username");
@@ -38,12 +39,12 @@ public class NewGuinea {
 		
 		switch(userType.toLowerCase().trim()) {
 		case "driver":
-			Driver driver = driverDAO.readUserId(userid);
+			Driver driver = driverDAO.readByUserId(userid);
 			giveDriverOptions(driver);
 			break;
-		case "manager":git pu
+		case "manager":
 			Manager manager = managerDAO.readByUserId(userid);
-			giveManagerOptions();
+			giveManagerOptions(manager);
 			break;
 		default:
 			System.out.println("This is invalid");
@@ -53,26 +54,34 @@ public class NewGuinea {
 	
 	public void giveDriverOptions(Driver driver) {
 		//viewing all deliveries in zone
-		System.out.println("press 1 to view all deliveries by zone, press 2 to assign a delivery, press 3 to change the status of a delivery");
+		System.out.println("press 1 to view all deliveries by zone, press 2 to assign a delivery, press 3 to change the status of a delivery, press 4 to log out");
 		int options = scan.nextInt();
 		switch(options) {
-		case 1:
-			Driver driver = driverDAO.
-			break;
-		case 2:
-			Driver driver = driverDAO.
-			break;
-			
-		case 3:
-			
-			break;
+			case 1:
+				String zone = driver.getDriverZone();
+				deliveryController.readAllByZone(zone);
+				break;
+			case 2:
+				System.out.println("Enter the id of the delivery you want to take on:");
+				int deliveryId = scan.nextInt();
+				deliveryController.assignDriver(driver.getDriverID(), deliveryId);
+				break;
+				
+			case 3:
+				
+				break;
+			case 4:
+				
+				break;
+			default:
+				break;
 		}
 		
 		//choosing to assign themselves a delivery
 		//changing the status of a delivery
 	}
 	
-	public void giveManagerOptions() {
+	public void giveManagerOptions(Manager manager) {
 		
 	}
 	

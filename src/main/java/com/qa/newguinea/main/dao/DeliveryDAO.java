@@ -126,8 +126,9 @@ public class DeliveryDAO implements DAO<Delivery> {
 			statement.setString(3, d.getDeliveryAddress());
 			statement.setString(4,  d.getDeliveryZone());
 			statement.setString(5,  d.getDeliveryStatus());
-			statement.setInt(7,  d.getDeliveryID());
 			statement.setInt(6, d.getDriverID());
+			statement.setInt(7,  d.getDeliveryID());
+
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {

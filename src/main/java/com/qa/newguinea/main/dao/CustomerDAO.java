@@ -66,7 +66,6 @@ public class CustomerDAO implements DAO<Customers> {
 		}
 
 		return null;
-		return null;
 	}
 
 	@Override
@@ -81,7 +80,6 @@ public class CustomerDAO implements DAO<Customers> {
 		return 0;
 	}
 
-	@Override
 	public Customers modelFromResult(ResultSet result) {
 		try {
 			int customerId = result.getInt("customer_id");
