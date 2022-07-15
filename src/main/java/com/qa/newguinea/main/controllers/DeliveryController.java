@@ -1,5 +1,6 @@
 package com.qa.newguinea.main.controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,8 +42,15 @@ public class DeliveryController implements CrudController<Delivery> {
 	public Delivery create() {
 		System.out.println("Please input order ID:");
 		int orderId = scan.nextInt();
-		
-		//get order info
+		System.out.println("Please input delivery date:");
+        String dateInString = scan.nextLine();
+        Date date = Date.valueOf(dateInString);
+		System.out.println("Please input address:");
+		String deliveryaddress = scan.nextLine();
+		System.out.println("PLease input delivery zone:");
+		String deliveryzone = scan.nextLine();
+		String status = "Awaiting driver";
+		Delivery d = dao.create(new Delivery(orderId, date, deliveryaddress, deliveryzone, 0, status));
 		//create delivery using dao
 		return null;
 	}
