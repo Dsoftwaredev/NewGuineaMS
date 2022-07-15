@@ -46,6 +46,20 @@ public class DriverDAO implements DAO<Driver> {
 	}
 	*/
 	
+	public Driver readUserId(int id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM drivers WHERE user_id = ?");) {
+			statement.setInt(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResult(resultSet);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
 	public Driver readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM drivers ORDER BY driver_id DESC LIMIT 1;");) {

@@ -37,6 +37,20 @@ public class ManagerDAO implements DAO<Manager> {
 		return null;
 	}
 	
+	public Manager readByUserId(int id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers WHERE user_id = ?");) {
+			statement.setInt(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResult(resultSet);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
 	/*
 	@Override
 	public List<Driver> readAll() {
