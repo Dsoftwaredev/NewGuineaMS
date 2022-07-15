@@ -1,44 +1,67 @@
 package com.qa.newguinea.main.controllers;
 
 import java.util.List;
+import java.util.Scanner;
 
+import com.qa.newguinea.main.dao.OrderDAO;
+import com.qa.newguinea.main.persistance.Delivery;
 import com.qa.newguinea.main.persistance.Order;
 
 public class OrderController implements CrudController<Order> {
 
+	Scanner scan = new Scanner(System.in);
+	
+	OrderDAO dao = new OrderDAO();
+	
 	@Override
 	public List<Order> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> list = dao.readAll();
+		System.out.println(list);
+		return list;
 	}
 
 	@Override
 	public Order read() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Please input Order ID:");
+		int orderid = scan.nextInt();
+		Order o = dao.read(orderid);
+		System.out.println(o);
+		return o;
 	}
 
 	@Override
 	public Order readLatest() {
-		// TODO Auto-generated method stub
-		return null;
+		Order o = dao.readLatest();
+		System.out.println(o);
+		return o;
 	}
 
 	@Override
 	public Order create() {
-		// TODO Auto-generated method stub
+		System.out.println("Please input order ID:");
+		int orderId = scan.nextInt();
 		return null;
 	}
 
 	@Override
 	public Order update() {
-		// TODO Auto-generated method stub
+		System.out.println("Please input order ID:");
 		return null;
 	}
 
 	@Override
 	public int delete() {
-		// TODO Auto-generated method stub
+		System.out.println("Please input order ID:");
+		int id = scan.nextInt();
+		int result = dao.delete(id);
+		
+		if(result == 1) {
+			System.out.println("Order cancelled.");
+		}
+		else {
+			System.out.println("Error! PLease try again.");
+		}
+		
 		return 0;
 	}
 
