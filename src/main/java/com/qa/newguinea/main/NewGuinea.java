@@ -36,12 +36,12 @@ public class NewGuinea {
 		
 		int userid = userDAO.logIn(name, pass);
 		
-		switch(userType.toLowerCase()) {
+		switch(userType.toLowerCase().trim()) {
 		case "driver":
 			Driver driver = driverDAO.readUserId(userid);
 			giveDriverOptions(driver);
 			break;
-		case "manager":
+		case "manager":git pu
 			Manager manager = managerDAO.readByUserId(userid);
 			giveManagerOptions();
 			break;
@@ -52,7 +52,24 @@ public class NewGuinea {
 	}
 	
 	public void giveDriverOptions(Driver driver) {
-		System.out.println("options");
+		//viewing all deliveries in zone
+		System.out.println("press 1 to view all deliveries by zone, press 2 to assign a delivery, press 3 to change the status of a delivery");
+		int options = scan.nextInt();
+		switch(options) {
+		case 1:
+			Driver driver = driverDAO.
+			break;
+		case 2:
+			Driver driver = driverDAO.
+			break;
+			
+		case 3:
+			
+			break;
+		}
+		
+		//choosing to assign themselves a delivery
+		//changing the status of a delivery
 	}
 	
 	public void giveManagerOptions() {
