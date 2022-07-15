@@ -17,7 +17,7 @@ public class CustomerController implements CrudController<Customers>{
 			System.out.println(customers);
 		return customers;
 	}
-git 
+ 
 	@Override
 	public Customers read() {
 
@@ -37,7 +37,7 @@ git
 		int userID = scan.nextInt();
 		System.out.println("Please enter a customer address");
 		String address = scan.nextLine();
-		Customers customers = customerDAO.create(new Customers(name, userID, address))
+		Customers customers = customerDAO.create(new Customers(name, userID, address));
 		return customers;
 	}
 
@@ -51,7 +51,7 @@ git
 		int userID = scan.nextInt();
 		System.out.println("Please enter a customer address");
 		String address = scan.nextLine();
-		Customers customers = customerDAO.create(new Customers(name, userID, address))
+		Customers customers = customerDAO.create(new Customers(name, userID, address));
 		return customers;
 	}
 
