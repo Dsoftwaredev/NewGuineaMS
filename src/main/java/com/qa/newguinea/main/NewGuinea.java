@@ -7,6 +7,7 @@ import com.qa.newguinea.main.dao.DeliveryDAO;
 import com.qa.newguinea.main.dao.DriverDAO;
 import com.qa.newguinea.main.dao.ManagerDAO;
 import com.qa.newguinea.main.dao.UserDAO;
+import com.qa.newguinea.main.persistance.Delivery;
 import com.qa.newguinea.main.persistance.Driver;
 import com.qa.newguinea.main.persistance.Manager;
 import com.qa.newguinea.utils.DBUtils;
@@ -60,17 +61,13 @@ public class NewGuinea {
 			int options = scan.nextInt();
 			switch(options) {
 				case 1:
-					String zone = driver.getDriverZone();
-					deliveryController.readAllByZone(zone);
+					getZoneDeliveries(driver);
 					break;
 				case 2:
-					System.out.println("Enter the id of the delivery you want to take on:");
-					int deliveryId = scan.nextInt();
-					deliveryController.assignDriver(driver.getDriverID(), deliveryId);
+					assignDriver(driver);
 					break;
-					
 				case 3:
-					
+					updateDeliveryStatus(driver);
 					break;
 				case 4:
 					use = false;
@@ -83,6 +80,30 @@ public class NewGuinea {
 		
 		//choosing to assign themselves a delivery
 		//changing the status of a delivery
+	}
+	
+	public void getZoneDeliveries(Driver driver) {
+		String zone = driver.getDriverZone();
+		deliveryController.readAllByZone(zone);
+		return;
+	}
+	
+	public void assignDriver(Driver driver) {
+		System.out.println("Enter the id of the delivery you want to take on:");
+		int deliveryId = scan.nextInt();
+		deliveryController.assignDriver(driver.getDriverID(), deliveryId);
+		return;
+	}
+	
+	public void updateDeliveryStatus(Driver driver) {
+		//System.out.println("Enter the id of the delivery you want to update the status of");
+		//int id = scan.nextInt();
+		Delivery d = deliveryController.read();
+		System.out.println("What is the new delivery status?");
+		String newStatus = scan.nextLine();
+		d.setDeliveryStatus(newStatus);
+		deliveryController.update(d);
+		System.out.println("Delivery status updated to "+newStatus);
 	}
 	
 	public void giveManagerOptions(Manager manager) {

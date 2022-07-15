@@ -49,9 +49,10 @@ public class DeliveryController implements CrudController<Delivery> {
 	public Delivery read() {
 		System.out.println("Please input delivery ID:");
 		int deliveryid = scan.nextInt();
+		scan.nextLine();
 		Delivery d = dao.read(deliveryid);
 		System.out.println(d);
-		return null;
+		return d;
 	}
 
 	@Override
@@ -75,7 +76,7 @@ public class DeliveryController implements CrudController<Delivery> {
 		String status = "Awaiting driver";
 		Delivery d = dao.create(new Delivery(orderId, date, deliveryaddress, deliveryzone, 0, status));
 		//create delivery using dao
-		return null;
+		return d;
 	}
 	
 	public Delivery assignDriver(int driverId, int deliveryId) {
@@ -105,6 +106,16 @@ public class DeliveryController implements CrudController<Delivery> {
 				break;
 			default:
 				break;
+		}
+		return null;
+	}
+	
+	public Delivery update(Delivery d) {
+		try {
+			return dao.update(d);
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 		return null;
 	}
