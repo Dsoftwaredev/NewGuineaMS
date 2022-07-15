@@ -15,13 +15,14 @@ public class DeliveryDAO implements DAO<Delivery> {
 	@Override
 	public Delivery modelFromResult(ResultSet result) {
 		try {
+			int deliveryId = result.getInt("delivery_id");
 			int orderId = result.getInt("order_id");
 			Date date = result.getDate("delivery_date");
 			String address = result.getString("delivery_address");
 			String zone = result.getString("delivery_zone");
 			int driverId = result.getInt("driver_id");
 			String status = result.getString("delivery_status");
-			return new Delivery(orderId, date, address, zone, driverId, status);
+			return new Delivery(deliveryId, orderId, date, address, zone, driverId, status);
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -120,7 +121,7 @@ public class DeliveryDAO implements DAO<Delivery> {
 	public Delivery update(Delivery d) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("UPDATE deliveries SET order_id = ?, delivery_date = ?, deliver_address = ?, delivery_zone = ?, delivery_status = ?, driver_id = ? WHERE delivery_id = ?;");) {
+						.prepareStatement("UPDATE deliveries SET order_id = ?, delivery_date = ?, delivery_address = ?, delivery_zone = ?, delivery_status = ?, driver_id = ? WHERE delivery_id = ?;");) {
 			statement.setInt(1, d.getOrderID());
 			statement.setDate(2, d.getDeliveryDate());
 			statement.setString(3, d.getDeliveryAddress());

@@ -54,28 +54,32 @@ public class NewGuinea {
 	
 	public void giveDriverOptions(Driver driver) {
 		//viewing all deliveries in zone
-		System.out.println("press 1 to view all deliveries by zone, press 2 to assign a delivery, press 3 to change the status of a delivery, press 4 to log out");
-		int options = scan.nextInt();
-		switch(options) {
-			case 1:
-				String zone = driver.getDriverZone();
-				deliveryController.readAllByZone(zone);
-				break;
-			case 2:
-				System.out.println("Enter the id of the delivery you want to take on:");
-				int deliveryId = scan.nextInt();
-				deliveryController.assignDriver(driver.getDriverID(), deliveryId);
-				break;
-				
-			case 3:
-				
-				break;
-			case 4:
-				
-				break;
-			default:
-				break;
+		boolean use = true;
+		while(use){
+			System.out.println("press 1 to view all deliveries by zone, press 2 to assign a delivery, press 3 to change the status of a delivery, press 4 to log out");
+			int options = scan.nextInt();
+			switch(options) {
+				case 1:
+					String zone = driver.getDriverZone();
+					deliveryController.readAllByZone(zone);
+					break;
+				case 2:
+					System.out.println("Enter the id of the delivery you want to take on:");
+					int deliveryId = scan.nextInt();
+					deliveryController.assignDriver(driver.getDriverID(), deliveryId);
+					break;
+					
+				case 3:
+					
+					break;
+				case 4:
+					use = false;
+					break;
+				default:
+					break;
+			}
 		}
+		
 		
 		//choosing to assign themselves a delivery
 		//changing the status of a delivery
