@@ -1,7 +1,9 @@
+/*
 package com.qa.newguinea.main.controllers;
 
 import java.util.List;
 
+import com.qa.newguinea.main.dao.CustomerDAO;
 import com.qa.newguinea.main.persistance.Customers;
 import java.util.Scanner;
 
@@ -12,7 +14,7 @@ public class CustomerController implements CrudController<Customers>{
 
 	/*@Override
 	public List<Customers> readAll() {
-		List<Customers> customers = customerDAO.readAll();
+		List<Customers> customers = CustomerDAO.readAll();
 		for (Customers customer : customers);
 			System.out.println(customers);
 		return customers;
@@ -42,7 +44,7 @@ public class CustomerController implements CrudController<Customers>{
 		int userID = scan.nextInt();
 		System.out.println("Please enter a customer address");
 		String address = scan.nextLine();
-		Customers customers = customerDAO.create(new Customers(name, userID, address));
+		Customers customers = CustomerDAO.create(new Customers(name, userID, address));
 		return customers;
 	}
 
@@ -56,7 +58,7 @@ public class CustomerController implements CrudController<Customers>{
 		int userID = scan.nextInt();
 		System.out.println("Please enter a customer address");
 		String address = scan.nextLine();
-		Customers customers = customerDAO.create(new Customers(name, userID, address));
+		Customers customers = CustomerDAO.create(new Customers(name, userID, address));
 		return customers;
 	}
 
@@ -64,7 +66,7 @@ public class CustomerController implements CrudController<Customers>{
 	public int delete() {
 		System.out.println("please enter the id of the customer you want to delete");
 		int id = scan.nextInt();
-		return customerDAO.delete(id);
+		return CustomerDAO.delete(id);
 	}
 
-}
+}*/

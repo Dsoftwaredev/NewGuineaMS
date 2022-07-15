@@ -3,19 +3,18 @@ package com.qa.newguinea.main.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import com.qa.newguinea.main.persistance.Driver;
+
+import com.qa.newguinea.main.persistance.Manager;
 import com.qa.newguinea.utils.DBUtils;
 
-public class DriverDAO implements DAO<Driver> {
-	
+public class ManagerDAO implements DAO<Manager> {
 	@Override
-	public Driver modelFromResult(ResultSet result) {
+	public Manager modelFromResult(ResultSet result) {
 		try {
-			int driverId = result.getInt("driver_id");
-			String name = result.getString("driver_name");
-			String zone = result.getString("driver_zone");
+			int managerId = result.getInt("manager_id");
+			String name = result.getString("manager_name");
 			int userId = result.getInt("user_id");
-			return new Driver(driverId, name, userId, zone);
+			return new Manager(managerId, name, userId);
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -24,9 +23,23 @@ public class DriverDAO implements DAO<Driver> {
 	}
 
 	@Override
-	public Driver read(int id) {
+	public Manager read(int id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM drivers WHERE driver_id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers WHERE manager_id = ?");) {
+			statement.setInt(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResult(resultSet);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public Manager readByUserId(int id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers WHERE user_id = ?");) {
 			statement.setInt(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -46,23 +59,9 @@ public class DriverDAO implements DAO<Driver> {
 	}
 	*/
 	
-	public Driver readUserId(int id) {
+	public Manager readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM drivers WHERE user_id = ?");) {
-			statement.setInt(1, id);
-			try (ResultSet resultSet = statement.executeQuery();) {
-				resultSet.next();
-				return modelFromResult(resultSet);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-	
-	public Driver readLatest() {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM drivers ORDER BY driver_id DESC LIMIT 1;");) {
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM managers ORDER BY manager_id DESC LIMIT 1;");) {
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
 				return modelFromResult(resultSet);
@@ -74,13 +73,12 @@ public class DriverDAO implements DAO<Driver> {
 	}
 
 	@Override
-	public Driver create(Driver d) {
+	public Manager create(Manager m) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO drivers(driver_name, driver_zone, user_id) VALUES (?, ?, ?)");) {
-			statement.setString(1, d.getDriverName());
-			statement.setString(2, d.getDriverZone());
-			statement.setInt(3, d.getUserID());
+						.prepareStatement("INSERT INTO drivers(manager_name, user_id) VALUES (?, ?);");) {
+			statement.setString(1, m.getManagername());
+			statement.setInt(2, m.getUserId());
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
@@ -91,14 +89,13 @@ public class DriverDAO implements DAO<Driver> {
 	}
 
 	@Override
-	public Driver update(Driver d) {
+	public Manager update(Manager m) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO drivers(driver_name, driver_zone, user_id) VALUES (?, ?, ?) WHERE driver_id = ?");) {
-			statement.setString(1, d.getDriverName());
-			statement.setString(2, d.getDriverZone());
-			statement.setInt(3, d.getUserID());
-			statement.setInt(4, d.getDriverID());
+						.prepareStatement("INSERT INTO managers(manager_name, user_id) VALUES (?, ?) WHERE driver_id = ?");) {
+			statement.setString(1, m.getManagername());
+			statement.setInt(2, m.getUserId());
+			statement.setInt(3, m.getManagerid());
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
@@ -113,7 +110,7 @@ public class DriverDAO implements DAO<Driver> {
 	public int delete(int id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("DELETE FROM drivers WHERE driver_id = ?");) {
+						.prepareStatement("DELETE FROM managers WHERE manager_id = ?");) {
 			statement.setInt(1, id);
 			return statement.executeUpdate();
 		} catch (Exception e) {
@@ -122,7 +119,5 @@ public class DriverDAO implements DAO<Driver> {
 		
 		return 0;
 	}
-
-	
 
 }
