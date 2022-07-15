@@ -14,25 +14,75 @@ public class OrderDAO implements DAO<Order> {
 
 	@Override
 	public Order read(int id) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE order_id = ?;");) {
+			statement.setInt(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResult(resultSet);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public Order readLatest() {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1");) {
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResult(resultSet);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
 	@Override
-	public Order create(Order t) {
-		// TODO Auto-generated method stub
+	public Order create(Order o) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO orders(customer_id, order_date, order_address) VALUES (?, ?, ?);");) {
+			statement.setInt(1, o.getCustomerid());
+			statement.setDate(2, o.getOrderdate());
+			statement.setString(3, o.getCustomeraddress());
+			statement.executeUpdate();
+			return readLatest();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
 	@Override
-	public Order update(Order t) {
-		// TODO Auto-generated method stub
+	public Order update(Order o) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO orders(customer_id, order_date, order_address) VALUES (?, ?, ?) WHERE order_id = ?;");) {
+			statement.setInt(1, o.getCustomerid());
+			statement.setDate(2, o.getOrderdate());
+			statement.setString(3, o.getCustomeraddress());
+			statement.setInt(4, o.getOrderId());
+			statement.executeUpdate();
+			return readLatest();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("DELETE FROM orders WHERE order_id = ?;");) {
+			statement.setInt(1, id);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return 0;
 	}
 
